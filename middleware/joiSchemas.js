@@ -1,8 +1,8 @@
-const { ExpressError, errorHandler, catchAsync } = require('./utils');
+const { ExpressError, errorHandler, catchAsync } = require('../helpers/utils');
 const Joi = require('joi');
 
-const validUser = (req, res, next) => {
-  const userSchema = Joi.object({
+const validReg = (req, res, next) => {
+  const registrationSchema = Joi.object({
     name: Joi.string()
       .trim()
       .min(2)
@@ -54,7 +54,42 @@ const validUser = (req, res, next) => {
         })
   });
 
-  const {value, error} = userSchema.validate(req.body, {abortEarly: false});
+  const {value, error} = registrationSchema.validate(req.body, {abortEarly: false});
+  if (error) {
+    const msgs = error.details.map(el => el.message);
+    throw new ExpressError(msgs, 400);
+  }
+
+  req.body = value;
+
+  return next();
+}
+
+const validLogin = (req, res, next) => {
+  const loginSchema = Joi.object({
+    email: Joi.string()
+    .trim()
+    .email({ 
+      minDomainSegments: 2,
+      tlds: { 
+        allow: ['com', 'net']
+      }
+    })
+    .required()
+    .messages({
+      'string.base': 'Text only.',
+      'any.required': 'Email is required.',
+      'string.email': 'Must be a valid email',
+    }),
+  password: Joi.string()
+    .trim()
+    .required()
+    .messages({
+      'any.required': 'Password is required.',
+    })
+  });
+
+  const {value, error} = loginSchema.validate(req.body, {abortEarly: false});
 
   if (error) {
     const msgs = error.details.map(el => el.message);
@@ -70,5 +105,6 @@ const validUser = (req, res, next) => {
 
 
 module.exports = {
-  validUser
+  validReg,
+  validLogin
 };

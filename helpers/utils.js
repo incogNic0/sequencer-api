@@ -14,7 +14,7 @@ const catchAsync = (func) => {
 
 const errorHandler = (err, req, res, next) => {
 	const { status = 500 } = err;
-	if (!err.messages) err.messages = ["Oh, no! Something went wrong with the server!"];
+	if (!err.messages) err.messages = ["Uh oh, server error!  Unable to process request."];
   const errors = {
     messages: err.messages,
     stack: err.stack,
