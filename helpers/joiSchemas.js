@@ -3,6 +3,20 @@ const Joi = require('joi');
 
 const validUser = (req, res, next) => {
   const userSchema = Joi.object({
+    name: Joi.string()
+      .trim()
+      .min(2)
+      .max(30)
+      .alphanum()
+      .required()
+      .messages({
+        'string.base': "Name must be text",
+        'string.min': 'Name must be at least 2 characters.',
+        'string.max': 'Name must be 30 characters or less.',
+        'string.alphanum': 'Name must only contain alpha-numeric characters.',
+        'any.required': 'Name is required.'
+      }),
+      
     email: Joi.string()
       .trim()
       .email({ 
@@ -43,7 +57,6 @@ const validUser = (req, res, next) => {
   const {value, error} = userSchema.validate(req.body, {abortEarly: false});
 
   if (error) {
-    console.log(error)
     const msgs = error.details.map(el => el.message);
     throw new ExpressError(msgs, 400);
   }
