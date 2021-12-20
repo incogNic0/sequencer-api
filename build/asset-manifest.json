@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "./static/css/main.95d1c88f.chunk.css",
+    "main.js": "./static/js/main.bd986e44.chunk.js",
+    "main.js.map": "./static/js/main.bd986e44.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.d2d334e0.js",
+    "runtime-main.js.map": "./static/js/runtime-main.d2d334e0.js.map",
+    "static/js/2.2d0bd8a1.chunk.js": "./static/js/2.2d0bd8a1.chunk.js",
+    "static/js/2.2d0bd8a1.chunk.js.map": "./static/js/2.2d0bd8a1.chunk.js.map",
+    "static/js/3.8b4bbd1b.chunk.js": "./static/js/3.8b4bbd1b.chunk.js",
+    "static/js/3.8b4bbd1b.chunk.js.map": "./static/js/3.8b4bbd1b.chunk.js.map",
+    "index.html": "./index.html",
+    "static/css/main.95d1c88f.chunk.css.map": "./static/css/main.95d1c88f.chunk.css.map",
+    "static/js/2.2d0bd8a1.chunk.js.LICENSE.txt": "./static/js/2.2d0bd8a1.chunk.js.LICENSE.txt",
+    "static/media/SamplePad.css": "./static/media/brushed-aluminium.312149e7.jpg",
+    "static/media/Sequencer.css": "./static/media/rotate-device.0eb0da31.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d2d334e0.js",
+    "static/js/2.2d0bd8a1.chunk.js",
+    "static/css/main.95d1c88f.chunk.css",
+    "static/js/main.bd986e44.chunk.js"
+  ]
+}
