@@ -31,12 +31,19 @@ const validUser = (req, res, next) => {
           'string.alphanum': 'Password can only alpha-numeric characters.'
         }),
   
-      passwordConfirm: Joi.ref('password')
+      passwordConfirm: Joi.string()
+        .required()
+        .valid(Joi.ref('password'))
+        .messages({
+          'any.required': 'Must confirm password.',
+          'any.only': 'Passwords must match.'
+        })
   });
 
   const {value, error} = userSchema.validate(req.body, {abortEarly: false});
 
   if (error) {
+    console.log(error)
     const msgs = error.details.map(el => el.message);
     throw new ExpressError(msgs, 400);
   }
