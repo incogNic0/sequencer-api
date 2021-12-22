@@ -17,16 +17,17 @@ router.post('/register', validReg, catchAsync( async (req, res, next) => {
   const email = req.body.email.toLowerCase();
   const { name, password } = req.body;
 
+  // Check for existing user
   const existingUser = await User.findOne({ email });
   if(existingUser) throw new ExpressError(['Email is already registered.'], 409);
 
+  // Create/Save new user and hashed password
   const newUser = new User({ name , email, password});
-
   const salt = await bycrypt.genSalt(10);
   newUser.password = await bycrypt.hash(password, salt)
-
   const user = await newUser.save()
 
+  // Return Token
   const payload = {
     user: {
       id: user.id
@@ -69,9 +70,8 @@ router.post('/login', validLogin, catchAsync( async (req, res, next) => {
       id: user.id
     }
   }
-
   const secret = process.env.JWT_SECRET;
-
+  
   jwt.sign(
     payload,
     secret,
